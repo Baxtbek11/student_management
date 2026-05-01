@@ -1,17 +1,22 @@
  <?php include "../config/db.php";
- $sql = " SELECT * FROM students";
+ $sql = " SELECT * FROM classes";
  $data = $conn->prepare($sql);
  $data->execute();
- $students = $data->fetchAll();
+ $classes = $data->fetchAll();
  $cnt = 1;
  ?>
 <!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <title>Studentlar</title>
-            <link rel="stylesheet" href="../assets/style.css">
+    <title>Classes</title>
+    <link rel="stylesheet" href="../assets/style.css">
     <style> 
+        *{
+                        margin: 0;
+            padding: 0;
+        }
+    
         body {
             font-family: Arial, sans-serif;
             background: #f4f6f9;
@@ -27,16 +32,15 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+                header {
+            position: absolute;
+            top: 0px;
+            background: #2c3e50;
+            padding: 15px 0;
+            width: 100%;
         }
 
-        .header h2 {
-            margin: 0;
-        }
+
 
         .add-btn {
             background: #28a745;
@@ -112,46 +116,36 @@
     </style>
 </head>
 <body>
-           <?php include '../yordamchi/header.php'; ?>
+       <?php include '../yordamchi/header.php'; ?>
 
 <div class="container">
-
-
     
     <div class="header">
-        <h2>Studentlar Ro'yxati</h2>
-        <a href="create.php" class="add-btn">+ Student qo‘shish</a        >
+        <h2>Classes Ro'yxati</h2>
+        <a href="create.php" class="add-btn">+ Class qo‘shish</a        >
     </div>
 
     <table>
         <thead style="">
             <tr>
                 <th>ID</th>
-                <th>Ism</th>
-                <th>Familiya</th>
-                <th>Yosh</th>
-                <th>Sinf</th>
-                <th>Telefon</th>
-                <th>Manzil</th>
+                <th>Sinfi</th>
+                <th>Teacher_id</th>
                 <th>Amallar</th>
             </tr>
         </thead>
 
         <tbody>
-            <?php foreach($students as $student): ?>
+            <?php foreach($classes as $class): ?>
             <tr>
                     <td><?= $cnt++?></td>
-                    <td><?= $student['first_name']?></td>
-                    <td><?= $student['last_name']?></td>
-                    <td><?= $student['age']?></td>
-                    <td><?= $student['class_name']?></td>
-                    <td><?= $student['phone']?></td>
-                    <td><?= $student['address']?></td>
+                    <td><?= $class['class_name']?></td>
+                    <td><?= $class['teacher_id']?></td>
                     
                     <td class="actions">
-                        <a href="show.php?id=<?= $student['id'] ?>" class="view">Ko‘rish</a>
-                        <a href="edit.php?id=<?= $student['id'] ?>" class="edit">Tahrirlash</a>
-                        <a href="delete.php?id=<?= $student['id'] ?>" class="delete" onclick="return confirm('O\'chirasizmi!')">O‘chirish</a>
+                        <a href="show.php?id=<?= $class['id'] ?>" class="view">Ko‘rish</a>
+                        <a href="edit.php?id=<?= $class['id'] ?>" class="edit">Tahrirlash</a>
+                        <a href="delete.php?id=<?= $class['id'] ?>" class="delete" onclick="return confirm('O\'chirasizmi!')">O‘chirish</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

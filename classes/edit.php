@@ -1,18 +1,18 @@
 <?php
 include "../config/db.php";
 $id = $_GET['id'];
-$sql = "SELECT * FROM students WHERE id = ?";
+$sql = "SELECT * FROM classes WHERE id = ?";
 $data = $conn->prepare($sql);
 $data->execute([$id]);
-$student = $data->fetch();
+$class = $data->fetch();
 ?>
 
 <!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <title>Student Edit</title>
-            <link rel="stylesheet" href="../assets/style.css">
+    <title>Class Edit</title>
+    <link rel="stylesheet" href="../assets/style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,6 +29,14 @@ $student = $data->fetch();
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             width: 400px;
+        }
+
+                header {
+            position: absolute;
+            top: 0px;
+            background: #2c3e50;
+            padding: 15px 0;
+            width: 100%;
         }
 
         h2 {
@@ -73,31 +81,20 @@ $student = $data->fetch();
     </style>
 </head>
 <body>
+       <?php include '../yordamchi/header.php'; ?>
 
 <div class="form-container">
-    <h2>Studentni tahrirlash</h2>
+    <h2>Classni tahrirlash</h2>
 
     <form action="update.php" method="POST">
-        <input type="hidden" name="id" value="<?= $student['id'] ?>" required>
-        <label>Ism (First Name)</label>
-        <input type="text" name="first_name" value="<?= $student['first_name'] ?>" required>
+        <input type="hidden" name="id" value="<?= $class['id'] ?>" required>
+        <label>Class_name (Class name)</label>
+        <input type="text" name="class_name" value="<?= $class['class_name'] ?>" required>
 
-        <label>Familiya (Last Name)</label>
-        <input type="text" name="last_name" value="<?= $student['last_name'] ?>" required>
+        <label>Teacher_id (Teacher_id)</label>
+        <input type="text" name="teacher_id" value="<?= $class['teacher_id'] ?>" required>
 
-        <label>Yosh (Age)</label>
-        <input type="number" name="age" value="<?= $student['age'] ?>" required>
-
-        <label>Sinf (Class)</label>
-        <input type="text" name="class_name" value="<?= $student['class_name'] ?>" required>
-
-        <label>Telefon</label>
-        <input type="tel" name="phone" placeholder="+998..." value="<?= $student['phone'] ?>" required>
-
-        <label>Manzil (Address)</label>
-        <textarea name="address" required> <?=  $student['address']  ?></textarea>
-
-        <button type="submit">Saqlash</button>
+        <button type="submit">Saqlash</button> 
     </form>
 </div>
 

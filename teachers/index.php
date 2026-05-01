@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Teachers</title>
+        <link rel="stylesheet" href="../assets/style.css">
     <style> 
         body {
             font-family: Arial, sans-serif;
@@ -111,6 +112,7 @@
     </style>
 </head>
 <body>
+           <?php include '../yordamchi/header.php'; ?>
 
 <div class="container">
     
@@ -143,6 +145,7 @@
                     <td><?= $teacher['phone']?></td>
                     <td><?= $teacher['address']?></td>
                     <td><?= $teacher['experience']?></td>
+
                     
                     <td class="actions">
                         <a href="show.php?id=<?= $teacher['id'] ?>" class="view">Ko‘rish</a>

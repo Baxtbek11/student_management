@@ -1,18 +1,15 @@
-<?php
-include "../config/db.php";
-$id = $_GET['id'];
-$sql = "SELECT * FROM students WHERE id = ?";
-$data = $conn->prepare($sql);
-$data->execute([$id]);
-$student = $data->fetch();
-?>
-
+<?php include '../config/db.php';
+ $sql = " SELECT * FROM teachers";
+ $data = $conn->prepare($sql);
+ $data->execute();
+ $teachers = $data->fetchAll();
+ ?> 
 <!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <title>Student Edit</title>
-            <link rel="stylesheet" href="../assets/style.css">
+    <title>Classes Form</title>
+    <link rel="stylesheet" href="../assets/style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -73,29 +70,22 @@ $student = $data->fetch();
     </style>
 </head>
 <body>
+   <?php include '../yordamchi/header.php'; ?>
 
 <div class="form-container">
-    <h2>Studentni tahrirlash</h2>
+    <h2>Class qo'shish</h2>
 
-    <form action="update.php" method="POST">
-        <input type="hidden" name="id" value="<?= $student['id'] ?>" required>
-        <label>Ism (First Name)</label>
-        <input type="text" name="first_name" value="<?= $student['first_name'] ?>" required>
+    <form action="store.php" method="POST">
+        <label>Class_name (Class Name)</label>
+        <input type="text" name="class_name" required>
+        <label for="teacher">Teacher_id</label>
+        <select name="teacher_id" id="teacher" required>
+            <option value="">Select teacher</option>    
+            <?php foreach($teachers as $teacher): ?>
+                <option value="<?= $teacher['id'] ?>"><?= $teacher['first_name'] . " ". $teacher['last_name'] ?></option>
+            <?php endforeach; ?>
 
-        <label>Familiya (Last Name)</label>
-        <input type="text" name="last_name" value="<?= $student['last_name'] ?>" required>
-
-        <label>Yosh (Age)</label>
-        <input type="number" name="age" value="<?= $student['age'] ?>" required>
-
-        <label>Sinf (Class)</label>
-        <input type="text" name="class_name" value="<?= $student['class_name'] ?>" required>
-
-        <label>Telefon</label>
-        <input type="tel" name="phone" placeholder="+998..." value="<?= $student['phone'] ?>" required>
-
-        <label>Manzil (Address)</label>
-        <textarea name="address" required> <?=  $student['address']  ?></textarea>
+        </select>
 
         <button type="submit">Saqlash</button>
     </form>

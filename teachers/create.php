@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Teacher Form</title>
+        <link rel="stylesheet" href="../assets/style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,6 +64,7 @@
     </style>
 </head>
 <body>
+           <?php include '../yordamchi/header.php'; ?>
 
 <div class="form-container">
     <h2>Teacher qo'shish</h2>

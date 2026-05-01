@@ -12,6 +12,7 @@ $teacher = $data->fetch();
 <head>
     <meta charset="UTF-8">
     <title>Teacher Edit</title>
+        <link rel="stylesheet" href="../assets/style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,6 +73,7 @@ $teacher = $data->fetch();
     </style>
 </head>
 <body>
+           <?php include '../yordamchi/header.php'; ?>
 
 <div class="form-container">
     <h2>Teacherni tahrirlash</h2>
